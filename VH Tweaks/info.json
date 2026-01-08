@@ -1,0 +1,12 @@
+{
+	"Name": "acs_tweaks",
+	"DisplayName": "VH Tweaks",
+	"GameVersion": 1.268,
+	"Version": 1.0,
+	"Desc": "A mod that tweaks the annoying grindy aspects of the game",
+	"IncreasedDesc": "Made by ~ V.H.",
+	"Author": "VH",
+	"Tags": [
+		"Function", "Tweaks"
+	]
+}
