@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("AXEN")]
 [assembly: AssemblyProduct("Acs_Tweaks")]
-[assembly: AssemblyCopyright("Copyright ©  2026")]
+[assembly: AssemblyCopyright("Copyright © V.H. 2026")]
 [assembly: AssemblyTrademark("VH")]
 [assembly: AssemblyCulture("")]
 

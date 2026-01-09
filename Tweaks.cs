@@ -1,6 +1,6 @@
-﻿using System;
+﻿using HarmonyLib;
+using System;
 using System.Runtime.CompilerServices;
-using HarmonyLib;
 using XiaWorld;
 
 namespace Acs_Tweaks {
@@ -19,12 +19,12 @@ namespace Acs_Tweaks {
 			GameDefine.MindStateChangeSpeeds.Add(7, new float[] { -.05f, -.1f,   0f,      -.14f });
 			GameDefine.MindState2TreeExp.Clear();
 			GameDefine.MindState2TreeExp.Add(0, .1f);
-			GameDefine.MindState2TreeExp.Add(1, .2f);
-			GameDefine.MindState2TreeExp.Add(2, .4f);
+			GameDefine.MindState2TreeExp.Add(1, .22f);
+			GameDefine.MindState2TreeExp.Add(2, .45f);
 			GameDefine.MindState2TreeExp.Add(3, 1f);
-			GameDefine.MindState2TreeExp.Add(4, 1.3f);
-			GameDefine.MindState2TreeExp.Add(5, 1.6f);
-			GameDefine.MindState2TreeExp.Add(6, 2f);
+			GameDefine.MindState2TreeExp.Add(4, 1.35f);
+			GameDefine.MindState2TreeExp.Add(5, 1.7f);
+			GameDefine.MindState2TreeExp.Add(6, 2.3f);
 			GameDefine.MindState2TreeExp.Add(7, 3f);
 			GameDefine.MindState2PracticeSpeed.Clear();
 			GameDefine.MindState2PracticeSpeed.Add(0, .1f);
@@ -40,9 +40,9 @@ namespace Acs_Tweaks {
 			GameDefine.MindState2Refining.Add(1, -1f);
 			GameDefine.MindState2Refining.Add(2, -.4f);
 			GameDefine.MindState2Refining.Add(3, 0f);
-			GameDefine.MindState2Refining.Add(4, 0.12f);
-			GameDefine.MindState2Refining.Add(5, 0.3f);
-			GameDefine.MindState2Refining.Add(6, 0.51f);
+			GameDefine.MindState2Refining.Add(4, .12f);
+			GameDefine.MindState2Refining.Add(5, .3f);
+			GameDefine.MindState2Refining.Add(6, .51f);
 			GameDefine.MindState2Refining.Add(7, 1f);
 			GameDefine.MindState2RefiningRate.Clear();
 			GameDefine.MindState2RefiningRate.Add(0, .1f);
@@ -55,7 +55,7 @@ namespace Acs_Tweaks {
 			GameDefine.MindState2RefiningRate.Add(7, 3.5f);
 			GameDefine.MindState2UnderstandRate.Clear();
 			GameDefine.MindState2UnderstandRate.Add(0, 0f);
-			GameDefine.MindState2UnderstandRate.Add(1, 0f);
+			GameDefine.MindState2UnderstandRate.Add(1, .01f);
 			GameDefine.MindState2UnderstandRate.Add(2, .1f);
 			GameDefine.MindState2UnderstandRate.Add(3, 1f);
 			GameDefine.MindState2UnderstandRate.Add(4, 1.5f);
@@ -96,6 +96,8 @@ namespace Acs_Tweaks {
 			GameDefine.SchoolShuiRankMap.Add(-1f, g_emFengshuiRank.Bad);
 			GameDefine.SchoolShuiRankMap.Add(-3.5f, g_emFengshuiRank.VeryBad);
 			GameDefine.SchoolShuiRankMap.Add(-999f, g_emFengshuiRank.Worst);
+			
+			AccessTools.StaticFieldRefAccess<float>(typeof(LsStoneData), "_NeedT")	= 600f;
 			
 			KLog.Dbg("ACS Tweaks Loaded.");
 		} //OnInit
@@ -218,6 +220,55 @@ namespace Acs_Tweaks {
 				
 				return false;
 			} //GetFiveBaseEfficiency
+			
+			[HarmonyPrefix]
+			[HarmonyPatch(typeof(JobFunc), nameof(JobFunc.GetThunderScale))]
+			[MethodImpl(MethodImplOptions.NoInlining)]
+			static bool GetThunderScale(ref float __result, Npc npc, float N) {
+				float	penaltyFix2Cloud	= npc.PropertyMgr.Practice.GetPenaltyFix2Cloud();
+				
+				__result	= (1.2f - npc.PropertyMgr.Luck * .05f) * (1f + .12f * N) * (1f + penaltyFix2Cloud) * (1f + GameEventMgr.Instance.GetCurDriver().ThunderAddion);
+				
+				return false;
+			} //GetThunderScale
+			[HarmonyPrefix]
+			[HarmonyPatch(typeof(NpcPractice), nameof(NpcPractice.GetPenaltyFix2Cloud))]
+			[MethodImpl(MethodImplOptions.NoInlining)]
+			static bool GetPenaltyFix2Cloud(NpcPractice __instance, ref float __result) {
+				float	penalty	= __instance.GetPenalty(),
+						num;
+				
+				if (penalty > 0f) {
+					num			= .01f * UnityEngine.Mathf.Min(1f, penalty);
+					
+					if (penalty > 10f)
+						num		+= .02f * UnityEngine.Mathf.Min(45f, penalty - 5f);
+					if (penalty > 50f)
+						num		+= .01f * UnityEngine.Mathf.Min(450f, penalty - 40f);
+					if (penalty > 500f)
+						num		+= .005f * (penalty - 500f);
+				} else {
+					num			= .005f * UnityEngine.Mathf.Max(-1f, penalty);
+					
+					if (penalty < -20f)
+						num		+= .005f * UnityEngine.Mathf.Max(-40f, penalty + 20f);
+					if (penalty < -50f)
+						num		+= .0005f * UnityEngine.Mathf.Max(-450f, penalty + 50f);
+					if (penalty < -500f)
+						num		+= .0001f * (penalty + 500f);
+				}
+				
+				__result	= UnityEngine.Mathf.Clamp(num, -.9f, float.MaxValue);
+				
+				return false;
+			} //GetPenaltyFix2Cloud
+			
+			[HarmonyPostfix]
+			[HarmonyPatch(typeof(EsotericaData), nameof(EsotericaData.GetRealDifficulty))]
+			[MethodImpl(MethodImplOptions.NoInlining)]
+			static void GetRealDifficulty(ref int __result) {
+				__result	= UnityEngine.Mathf.RoundToInt(__result / 1.4f);
+			} //GetRealDifficulty
 			
 		} //Nerf
 		
