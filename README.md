@@ -12,6 +12,7 @@ A tweak mod for Amazing Cultivation Simulator.
 - [x] Makes Law Compatibility Matches more realistic (Easy?).
 - [x] Pet Changing Delay is 1 day instead of 3 days.
 - [x] More viable Tribulation (Easy).
+- [x] More Manual Pavillion Storage Capacity.
 - [ ] Other Upcoming Easy-Mode tweaks to normalize the game and remove it's exponential boredom (& determinism).
 - [ ] Better Mortal Disciple Stats.
 - [ ] Training Facilities(?)

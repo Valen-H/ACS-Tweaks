@@ -1,0 +1,5 @@
+﻿<MainList>
+	<List>
+		<Data Kind="Builds" Type="Sect" Unlock="3" CMDType="Build" Name="ACS_Train" />
+	</List>
+</MainList>

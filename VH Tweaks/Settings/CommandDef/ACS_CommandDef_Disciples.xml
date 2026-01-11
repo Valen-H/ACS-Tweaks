@@ -1,0 +1,7 @@
+<CommandTypes>
+	<List>
+		<CommandType Name="ACSTrain" Class="CommandACSTrain">
+			<Single>0</Single>
+		</CommandType>
+	</List>
+</CommandTypes>

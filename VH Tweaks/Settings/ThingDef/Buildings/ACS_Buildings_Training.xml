@@ -1,0 +1,59 @@
+<ThingDefs>
+	<List>
+		<ThingDef Type="Building" Name="ACS_Train" Parent="FurnitureBase">
+			<ThingName>Skill Training Table</ThingName>
+			<Desc>A place to train attributes.</Desc>
+			<TexPath>Spr\Building\TTK_BTC.png</TexPath>
+			<TexScale>0.38</TexScale>
+			<Tags>
+				<Tag Name="SkillPractice" Level="1" />
+			</Tags>
+			<Frags>
+				<li Frag="HearStep" />
+				<li Frag="DayDream" />
+			</Frags>
+			<SelectAble>1</SelectAble>
+			<VisualAble>1</VisualAble>
+			<CastShadow>1</CastShadow>
+			<BlockLight>0</BlockLight>
+			<UseHitPoints>1</UseHitPoints>
+			<ColliderKind>Across</ColliderKind>
+			<Collider>
+				<!--(0Empty 1Base) 2EmptyCenter 4EmptyWorkspace-->
+				<Data>
+				[1,1],
+				[0,4],
+				</Data>
+				<Offset>
+					<y>0.5</y>
+					<x>0.5</x>
+				</Offset>
+			</Collider>
+			<Building>
+				<NoFengshui>0</NoFengshui>
+				<BePackage>1</BePackage>
+				<BagDrop>0</BagDrop>
+				<IsVirtualBuilding>0</IsVirtualBuilding>
+				<MaxWorker>1</MaxWorker>
+				<LeaveResourcesWhenKilled>1</LeaveResourcesWhenKilled>
+				<RemovePriceFactor>0.7</RemovePriceFactor>
+				<TerrainAffordanceNeeded>Ground</TerrainAffordanceNeeded>
+				<BasePracticeEffectiveness>1.3</BasePracticeEffectiveness>
+				<BuildMode>Single</BuildMode>
+				<BeMade>
+					<WorkToMake>250</WorkToMake>
+					<Quality>0</Quality>
+					<StuffCategories>
+						<Stuff name="MetalBlock" />
+						<Stuff name="WoodBlock" />
+						<Stuff name="RockBlock" />
+					</StuffCategories>
+					<CostStuffCount>30</CostStuffCount>
+				</BeMade>
+			</Building>
+			<StoryBnts>
+				<li Name="Start Training" Desc="Train a Disciple" Story="Story_ACSTrain1" Cost="3" Icon="res/Sprs/ui/icon_hand" Appoint="3" />
+			</StoryBnts>
+		</ThingDef>
+	</List>
+</ThingDefs>

@@ -1,0 +1,9 @@
+<JobDefs>
+	<List>
+		<JobDef Name="JobACSTrain">
+			<DriverClass>JobACSTrain</DriverClass>
+			<DisplayName>Training</DisplayName>
+			<Desc>Train Skills.</Desc>
+		</JobDef>
+	</List>
+</JobDefs>

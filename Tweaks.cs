@@ -1,6 +1,9 @@
 ﻿using HarmonyLib;
+
 using System;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+
 using XiaWorld;
 
 namespace Acs_Tweaks {
@@ -97,7 +100,7 @@ namespace Acs_Tweaks {
 			GameDefine.SchoolShuiRankMap.Add(-3.5f, g_emFengshuiRank.VeryBad);
 			GameDefine.SchoolShuiRankMap.Add(-999f, g_emFengshuiRank.Worst);
 			
-			AccessTools.StaticFieldRefAccess<float>(typeof(LsStoneData), "_NeedT")	= 600f;
+			AccessTools.StaticFieldRefAccess<float>(typeof(LsStoneData), "_NeedT")		= 600f;
 			
 			KLog.Dbg("ACS Tweaks Loaded.");
 		} //OnInit
@@ -269,6 +272,15 @@ namespace Acs_Tweaks {
 			static void GetRealDifficulty(ref int __result) {
 				__result	= UnityEngine.Mathf.RoundToInt(__result / 1.4f);
 			} //GetRealDifficulty
+			
+			[HarmonyPostfix]
+			[HarmonyPatch(typeof(CangJingGeMgr), MethodType.Constructor)]
+			[MethodImpl(MethodImplOptions.NoInlining)]
+			static void CangJingGeMgr_Ctor(object __instance) {
+				var	field	= __instance.GetType().GetField("BOOK_SHELF_MEMORY", BindingFlags.Instance | BindingFlags.NonPublic);
+				
+				field?.SetValue(__instance, 200);
+			} //CangJingGeMgr_Ctor
 			
 		} //Nerf
 		

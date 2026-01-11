@@ -71,6 +71,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>COPY "$(TargetPath)" "..\..\..\..\Mods\VH Tweaks\"</PostBuildEvent>
+    <PostBuildEvent>XCOPY "..\..\VH Tweaks\" "..\..\..\..\Mods\VH Tweaks\" /E /H /C /I /Y
+XCOPY "$(TargetPath)" "..\..\..\..\Mods\VH Tweaks\" /E /H /C /I /Y</PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -1,0 +1,24 @@
+<Stories>
+	<List>
+		<Story Name="Story_ACSTrain1" Parent="BaseFillingStory">
+			<DisplayName>Training</DisplayName>
+			<Desc>[NAME] is about to Train.</Desc>
+			<Kind>None</Kind>
+			<Selections>
+				<li>
+					<Display>Train Mining</Display>
+					<OKResult>
+						<![CDATA[
+							
+						]]>
+					</OKResult>
+				</li>
+			</Selections>
+			<GlobleOKResult>
+				<![CDATA[
+					
+				]]>
+			</GlobleOKResult>
+		</Story>
+	</List>
+</Stories>
