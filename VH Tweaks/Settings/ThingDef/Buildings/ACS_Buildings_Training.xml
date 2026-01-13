@@ -2,7 +2,7 @@
 	<List>
 		<ThingDef Type="Building" Name="ACS_Train" Parent="FurnitureBase">
 			<ThingName>Skill Training Table</ThingName>
-			<Desc>A place to train attributes.</Desc>
+			<Desc>A place to train attributes.\n\n[OUT OF ORDER!!]</Desc>
 			<TexPath>Spr\Building\TTK_BTC.png</TexPath>
 			<TexScale>0.38</TexScale>
 			<Tags>

@@ -6,12 +6,176 @@
 			<Kind>None</Kind>
 			<Selections>
 				<li>
-					<Display>Train Mining</Display>
+					<Display>Train Social</Display>
+					<Tip>Not Implemented</Tip>
+					<DisplayCondition>
+						<![CDATA[
+							true
+						]]>
+					</DisplayCondition>
 					<OKResult>
 						<![CDATA[
-							
+							CS.XiaWorld.JobMgr.Instance:CreateJob("JobACSTrain", nil, me, "social")
 						]]>
 					</OKResult>
+				</li>
+				<li>
+					<Display>Train Battle</Display>
+					<Tip>Not Implemented</Tip>
+					<DisplayCondition>
+						<![CDATA[
+							true
+						]]>
+					</DisplayCondition>
+					<OKResult>
+						<![CDATA[
+							CS.XiaWorld.JobMgr.Instance:CreateJob("JobACSTrain", nil, me, "battle")
+						]]>
+					</OKResult>
+				</li>
+				<li>
+					<Display>Train Artisanry</Display>
+					<Tip>Not Implemented</Tip>
+					<DisplayCondition>
+						<![CDATA[
+							true
+						]]>
+					</DisplayCondition>
+					<OKResult>
+						<![CDATA[
+							CS.XiaWorld.JobMgr.Instance:CreateJob("JobACSTrain", nil, me, "artisanry")
+						]]>
+					</OKResult>
+				</li>
+				<li>
+					<Display>Train Qi Sense</Display>
+					<Tip>Not Implemented</Tip>
+					<DisplayCondition>
+						<![CDATA[
+							false
+						]]>
+					</DisplayCondition>
+					<OKResult>
+						<![CDATA[
+							CS.XiaWorld.JobMgr.Instance:CreateJob("JobACSTrain", nil, me, "qisense")
+						]]>
+					</OKResult>
+				</li>
+				<li>
+					<Display>Train Mining</Display>
+					<Tip>Not Implemented</Tip>
+					<DisplayCondition>
+						<![CDATA[
+							me:GetGLevel() == 0
+						]]>
+					</DisplayCondition>
+					<OKResult>
+						<![CDATA[
+							CS.XiaWorld.JobMgr.Instance:CreateJob("JobACSTrain", nil, me, "mining")
+						]]>
+					</OKResult>
+				</li>
+				<li>
+					<Display>Train Farming</Display>
+					<Tip>Not Implemented</Tip>
+					<DisplayCondition>
+						<![CDATA[
+							me:GetGLevel() == 0
+						]]>
+					</DisplayCondition>
+					<OKResult>
+						<![CDATA[
+							CS.XiaWorld.JobMgr.Instance:CreateJob("JobACSTrain", nil, me, "farming")
+						]]>
+					</OKResult>
+				</li>
+				<li>
+					<Display>Train Construction</Display>
+					<Tip>Not Implemented</Tip>
+					<DisplayCondition>
+						<![CDATA[
+							me:GetGLevel() == 0
+						]]>
+					</DisplayCondition>
+					<OKResult>
+						<![CDATA[
+							CS.XiaWorld.JobMgr.Instance:CreateJob("JobACSTrain", nil, me, "construction")
+						]]>
+					</OKResult>
+				</li>
+				<li>
+					<Display>Train Cooking</Display>
+					<Tip>Not Implemented</Tip>
+					<DisplayCondition>
+						<![CDATA[
+							true
+						]]>
+					</DisplayCondition>
+					<OKResult>
+						<![CDATA[
+							CS.XiaWorld.JobMgr.Instance:CreateJob("JobACSTrain", nil, me, "cooking")
+						]]>
+					</OKResult>
+				</li>
+				<li>
+					<Display>Train Crafting</Display>
+					<Tip>Not Implemented</Tip>
+					<DisplayCondition>
+						<![CDATA[
+							me:GetGLevel() == 0
+						]]>
+					</DisplayCondition>
+					<OKResult>
+						<![CDATA[
+							CS.XiaWorld.JobMgr.Instance:CreateJob("JobACSTrain", nil, me, "crafting")
+						]]>
+					</OKResult>
+				</li>
+				<li>
+					<Display>Train Medicine</Display>
+					<Tip>Not Implemented</Tip>
+					<DisplayCondition>
+						<![CDATA[
+							me:GetGLevel() == 0
+						]]>
+					</DisplayCondition>
+					<OKResult>
+						<![CDATA[
+							CS.XiaWorld.JobMgr.Instance:CreateJob("JobACSTrain", nil, me, "medicine")
+						]]>
+					</OKResult>
+				</li>
+				<li>
+					<Display>Train Magic</Display>
+					<Tip>Not Implemented</Tip>
+					<DisplayCondition>
+						<![CDATA[
+							me:GetGLevel() == 0
+						]]>
+					</DisplayCondition>
+					<OKResult>
+						<![CDATA[
+							CS.XiaWorld.JobMgr.Instance:CreateJob("JobACSTrain", nil, me, "magic")
+						]]>
+					</OKResult>
+				</li>
+				<li>
+					<Display>Train Magic Crafting</Display>
+					<Tip>Not Implemented</Tip>
+					<DisplayCondition>
+						<![CDATA[
+							me:GetGLevel() == 0
+						]]>
+					</DisplayCondition>
+					<OKResult>
+						<![CDATA[
+							CS.XiaWorld.JobMgr.Instance:CreateJob("JobACSTrain", nil, me, "magiccrafting")
+						]]>
+					</OKResult>
+				</li>
+				<li>
+					<Display>Leave</Display>
+					<Tip>Not Implemented</Tip>
 				</li>
 			</Selections>
 			<GlobleOKResult>
@@ -19,6 +183,11 @@
 					
 				]]>
 			</GlobleOKResult>
+			<GlobleNOResult>
+				<![CDATA[
+					
+				]]>
+			</GlobleNOResult>
 		</Story>
 	</List>
 </Stories>
