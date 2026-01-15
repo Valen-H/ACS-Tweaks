@@ -4,7 +4,7 @@ A tweak mod for Amazing Cultivation Simulator.
 
 ## Features (& Upcoming)
 
-- [x] Tweaks some grindy/slow aspects of the game like the Mental State (Mind), Practice Skill Exp Rate & Lower Attainment, Extreme Volatility of everything during GC breakthroughs, Feng Shui requirements (Blessed etc).
+- [x] Tweaks some grindy/slow aspects of the game like the Mental State (Mind), Practice Skill Exp Rate & Lower Attainment, Extreme Volatility of everything during GC breakthroughs (e.g Mood/Mental), Feng Shui requirements (Blessed etc).
 - [x] Changes the cost of Skill Learning (Easy).
 - [x] Increases Base Move Speed of Disciples (+1), and their skill acquisition rate (~x2).
 - [x] Makes slow events faster (City & Adventure mainly).

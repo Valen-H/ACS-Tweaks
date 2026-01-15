@@ -303,6 +303,24 @@ namespace Acs_Tweaks {
 				field?.SetValue(__instance, 999);
 			} //HERaceInfoDef
 			
+			[HarmonyPrefix]
+			[HarmonyPatch(typeof(NpcMoodMgr), "UpdateMoodComplexity")]
+			[MethodImpl(MethodImplOptions.NoInlining)]
+			static bool UpdateMoodComplexity(NpcMoodMgr __instance) {
+				var	comx	= AccessTools.Field(typeof(NpcMoodMgr), "m_fMoodComplexity");
+				
+				foreach (var keyValuePair in __instance.MoodList) {
+					for (int i = 0; i < keyValuePair.Value.Count; i++) {
+						NpcMoodDef	def	= keyValuePair.Value[i].def;
+						float		num	= UnityEngine.Mathf.Max(keyValuePair.Value[i].Stack, .9f) * def.Value * UnityEngine.Mathf.Pow(def.StackRatio, i) / 1.2f;
+						
+						comx?.SetValue(__instance, (float)comx?.GetValue(__instance) + UnityEngine.Mathf.Abs(num));
+					}
+				}
+				
+				return false;
+			} //UpdateMoodComplexity
+			
 			[HarmonyPostfix]
 			[HarmonyPatch(typeof(GongStageNeck), MethodType.Constructor)]
 			[MethodImpl(MethodImplOptions.NoInlining)]
