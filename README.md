@@ -4,19 +4,20 @@ A tweak mod for Amazing Cultivation Simulator.
 
 ## Features (& Upcoming)
 
-- [x] Tweaks some grindy/slow aspects of the game like the Mental State (Mind), Practice Skill Exp Rate & Lower Attainment, Extreme Volatility of everything during GC breakthroughs (e.g Mood/Mental), Feng Shui requirements (Blessed etc).
+- [x] Tweaks some grindy/slow aspects of the game like the Mental State (Mind), Practice Skill Exp Rate & Lower Attainment, Extreme Volatility of everything during GC breakthroughs (e.g Mood/Mental, +Physicals/Shendao), Feng Shui requirements (Blessed etc).
 - [x] Changes the cost of Skill Learning (Easy).
 - [x] Increases Base Move Speed of Disciples (+1), and their skill acquisition rate (~x2).
 - [x] Makes slow events faster (City & Adventure mainly).
 - [x] Qi Gathering stabilization completes in 1 day instead of 5 days (optional: make sure you edit your other mods to display it correctly).
 - [x] Makes Law Compatibility Matches more realistic (Easy?).
 - [x] Pet Changing Delay is 1 day instead of 3 days.
+- [x] Activate 4 Talismans by default instead of 3.
 - [x] More viable Tribulation (Easy).
 - [x] More Manual Pavillion Storage Capacity.
 - [x] Faster Enlightened Animal Thinking & Increased Thoughts Cap (Easy?).
 - [x] No % Qi Consumption during Adventures.
+- [x] Better Disciple Generation Stats.
 - [ ] Other Upcoming Easy-Mode tweaks to normalize the game and remove it's exponential boredom (& determinism).
-- [ ] Better Mortal Disciple Stats.
 - [ ] Training Facilities(?)
 - [ ] Better Pet Training.
 

@@ -139,7 +139,8 @@ namespace Acs_Tweaks {
 			[HarmonyPatch(typeof(Npc), nameof(Npc.GetSpeed))]
 			[MethodImpl(MethodImplOptions.NoInlining)]
 			static void Npc_GetSpeed(ref float __result) {
-				__result++;
+				if (__result > 0)
+					__result	+= 1.5f;
 			} //Npc_GetSpeed
 			
 			[HarmonyPostfix]
@@ -346,6 +347,27 @@ namespace Acs_Tweaks {
 				__result	/= 2f;
 			} //PlacesMgr_GetCost
 			
+			[HarmonyPrefix]
+			[HarmonyPatch(typeof(BodyPractice), nameof(BodyPractice.GetItemCost))]
+			[MethodImpl(MethodImplOptions.NoInlining)]
+			static bool GetItemCost(BodyPractice __instance, ref float __result, string part) {
+				int	partQuenchingCount	= __instance.GetPartQuenchingCount(part);
+				
+				__result				= 1f + partQuenchingCount / 100f;
+				
+				return false;
+			} //GetItemCost
+			[HarmonyPrefix]
+			[HarmonyPatch(typeof(BodyPractice), nameof(BodyPractice.GetPracticeNeedCost))]
+			[MethodImpl(MethodImplOptions.NoInlining)]
+			static bool GetPracticeNeedCost(BodyPractice __instance, ref float __result, string part) {
+				int	partQuenchingCount	= __instance.GetPartQuenchingCount(part);
+				
+				__result				= 1f + partQuenchingCount / 25f;
+				
+				return false;
+			} //GetPracticeNeedCost
+			
 			[HarmonyTranspiler]
 			[HarmonyPatch(typeof(JobLeave2Explore), "CheckWaitDie")]
 			[MethodImpl(MethodImplOptions.NoInlining)]
@@ -400,7 +422,98 @@ namespace Acs_Tweaks {
 				return codes;
 			} //ToilBrokenNeck_OnEnterToil
 			
+			[HarmonyTranspiler]
+			[HarmonyPatch(typeof(NpcEquipData), nameof(NpcEquipData.ActiveItemThing))]
+			[MethodImpl(MethodImplOptions.NoInlining)]
+			static IEnumerable<CodeInstruction> ActiveItemThing(IEnumerable<CodeInstruction> instructions) {
+				var	codes		= new List<CodeInstruction>(instructions);
+				var	player		= AccessTools.PropertyGetter(typeof(Npc), nameof(Npc.IsRealPlayerThing));
+				
+				for (int i = 0; i < codes.Count; i++) {
+					if (i < codes.Count - 8 &&
+						codes[i].LoadsConstant(3) &&
+						codes[i + 7].Calls(player)) {
+						codes[i].operand	= 4;
+						
+						KLog.Dbg("NpcEquipData.ActiveItemThing Patched.");
+						
+						break;
+					}
+				}
+				
+				return codes;
+			} //ActiveItemThing
+			
+			[HarmonyTranspiler]
+			[HarmonyPatch(typeof(NpcRandomMechine), "_RandomNpc")]
+			[MethodImpl(MethodImplOptions.NoInlining)]
+			static IEnumerable<CodeInstruction> RandomNpc(IEnumerable<CodeInstruction> instructions) {
+				var	codes		= new List<CodeInstruction>(instructions);
+				var	rand		= AccessTools.Method(typeof(World), nameof(World.RandomRange), new Type[] { typeof(int), typeof(int), typeof(GMathUtl.RandomType) });
+				var	addb		= AccessTools.Method(typeof(NpcBaseProperty), nameof(NpcBaseProperty.AddBaseAddion));
+				
+				for (int i = 0; i < codes.Count; i++) {
+					if (i < codes.Count - 22 &&
+						codes[i].LoadsConstant(0) &&
+						codes[i + 1].LoadsConstant(6) &&
+						codes[i + 2].LoadsConstant(0) &&
+						codes[i + 3].Calls(rand) &&
+						codes[i + 8].LoadsConstant(0) &&
+						codes[i + 9].LoadsConstant(5) &&
+						codes[i + 10].LoadsConstant(0) &&
+						codes[i + 11].Calls(rand) &&
+						codes[i + 21].LoadsConstant(10f) &&
+						codes[i + 27].LoadsConstant(1f) &&
+						codes[i + 28].Calls(addb) &&
+						codes[i + 36].LoadsConstant(30f)) {
+						codes[i].operand		= 1;
+						codes[i + 1].operand	= 9;
+						codes[i + 21].operand	= 13f;
+						codes[i + 27].operand	= 1.12f;
+						codes[i + 36].operand	= 45f;
+						
+						KLog.Dbg("NpcRandomMechine._RandomNpc Patched.");
+						
+						break;
+					}
+				}
+				
+				return codes;
+			} //RandomNpc
+			
 		} //Nerf
+		
+		[HarmonyPatch]
+		static class Quenching {
+			
+			[MethodImpl(MethodImplOptions.NoInlining)]
+			static IEnumerable<MethodBase> TargetMethods() {
+				yield return AccessTools.Method(typeof(BodyPractice), nameof(BodyPractice.BeginBodyQuenching));
+				yield return AccessTools.Method(typeof(BodyPractice), nameof(BodyPractice.ReBeginDoQuenching));
+			} //TargetMethods
+			
+			[HarmonyTranspiler]
+			[MethodImpl(MethodImplOptions.NoInlining)]
+			static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) {
+				var	codes		= new List<CodeInstruction>(instructions);
+				var	cycle		= AccessTools.Field(typeof(BPQuenchingMethodDef), nameof(BPQuenchingMethodDef.CycleScaleAddtion));
+				
+				for (int i = 0; i < codes.Count; i++) {
+					if (i < codes.Count - 7 &&
+						codes[i].LoadsConstant(30f) &&
+						codes[i + 6].LoadsField(cycle)) {
+						codes[i].operand	= 10f;
+						
+						KLog.Dbg("BodyPractice~Quenching Patched.");
+						
+						break;
+					}
+				}
+				
+				return codes;
+			} //Transpiler
+			
+		} //Quenching
 		
 		[HarmonyPatch]
 		static class Fixes {
