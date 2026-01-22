@@ -334,10 +334,12 @@ namespace Acs_Tweaks {
 			[HarmonyPrefix]
 			[HarmonyPatch(typeof(NpcSkillData), nameof(NpcSkillData.AddSkillExp))]
 			[MethodImpl(MethodImplOptions.NoInlining)]
-			static void AddSkillExp(ref float v) {
-				v	+= 40;
-				v	*= 2.4f;
-				v	+= 200;
+			static void AddSkillExp(NpcSkillData __instance, g_emNpcSkillType type, ref float v) {
+				int	lvl	= __instance.GetSkillLevel(type);
+				
+				v	+= lvl * 2f + 40f;
+				v	*= 2.4f + lvl / 30f;
+				v	+= 200f + lvl * 6f;
 			} //AddSkillExp
 			
 			[HarmonyPostfix]
@@ -483,6 +485,53 @@ namespace Acs_Tweaks {
 				
 				return codes;
 			} //RandomNpc
+			
+			[HarmonyTranspiler]
+			[HarmonyPatch(typeof(JobReceiveApprentice), "OnLeaveJob")]
+			[MethodImpl(MethodImplOptions.NoInlining)]
+			static IEnumerable<CodeInstruction> JobReceiveApprentice_OnLeaveJob(IEnumerable<CodeInstruction> instructions) {
+				var	codes	= new List<CodeInstruction>(instructions);
+				var	alist	= AccessTools.Field(typeof(NpcPractice), nameof(NpcPractice.ApprenticeList));
+				
+				for (int i = 0; i < codes.Count; i++) {
+					if (i < codes.Count - 3 &&
+						codes[i].LoadsField(alist) &&
+						codes[i + 2].LoadsConstant(8)) {
+						codes[i + 2].opcode		= OpCodes.Ldc_I4;
+						codes[i + 2].operand	= 16;
+						
+						KLog.Dbg("JobReceiveApprentice.OnLeaveJob Patched.");
+						
+						break;
+					}
+				}
+				
+				return codes;
+			} //JobReceiveApprentice_OnLeaveJob
+			
+			[HarmonyTranspiler]
+			[HarmonyPatch(typeof(NpcPractice), nameof(NpcPractice.DaoHangTianJieSuc))]
+			[MethodImpl(MethodImplOptions.NoInlining)]
+			static IEnumerable<CodeInstruction> DaoHangTianJieSuc(IEnumerable<CodeInstruction> instructions) {
+				var	codes	= new List<CodeInstruction>(instructions);
+				var	cnt		= AccessTools.PropertyGetter(typeof(NpcPractice), nameof(NpcPractice.DaoHangJieCount));
+				
+				for (int i = 0; i < codes.Count; i++) {
+					if (i < codes.Count - 4 &&
+						codes[i].Calls(cnt) &&
+						codes[i + 2].LoadsConstant(10) &&
+						codes[i + 3].opcode == OpCodes.Mul) {
+						codes[i + 2].opcode		= OpCodes.Ldc_I4_S;
+						codes[i + 2].operand	= 30;
+						
+						KLog.Dbg("NpcPractice.DaoHangTianJieSuc Patched.");
+						
+						break;
+					}
+				}
+				
+				return codes;
+			} //DaoHangTianJieSuc
 			
 		} //Nerf
 		

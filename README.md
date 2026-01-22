@@ -2,6 +2,8 @@
 
 A tweak mod for Amazing Cultivation Simulator.
 
+_Requires **ModLoaderLite**._  
+
 ## Features (& Upcoming)
 
 - [x] Tweaks some grindy/slow aspects of the game like the Mental State (Mind), Practice Skill Exp Rate & Lower Attainment, Extreme Volatility of everything during GC breakthroughs (e.g Mood/Mental, +Physicals/Shendao), Feng Shui requirements (Blessed etc).
@@ -15,14 +17,16 @@ A tweak mod for Amazing Cultivation Simulator.
 - [x] More viable Tribulation (Easy).
 - [x] More Manual Pavillion Storage Capacity.
 - [x] Faster Enlightened Animal Thinking & Increased Thoughts Cap (Easy?).
-- [x] No % Qi Consumption during Adventures.
-- [x] Better Disciple Generation Stats.
+- [x] Low % Qi Consumption during Adventures re-entry.
+- [x] Better Disciple Character Generation Stats.
+- [x] Inners can have max 16 Apprentices instead of 8.
+- [x] Attainment Tribulations refund 30 attainment instead of 10.
 - [ ] Other Upcoming Easy-Mode tweaks to normalize the game and remove it's exponential boredom (& determinism).
 - [ ] Training Facilities(?)
 - [ ] Better Pet Training.
 
 ## Append
 
-- Be careful when changing the name of the project or the assembly, _ModloaderLite_ will not be able to find it.
-- Do not monetize but do take part in development.
-- I do not upload on Steam or Nexus, these sites are unfriendly.
+> - Be careful when changing the name of the project or the assembly, _ModloaderLite_ will not be able to find it.
+> - Do not monetize but do take part in development.
+> - I do not upload on Steam or Nexus, these sites are unfriendly.

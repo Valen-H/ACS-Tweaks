@@ -2,11 +2,15 @@
 	"Name": "acs_tweaks",
 	"DisplayName": "VH Tweaks",
 	"GameVersion": 1.268,
-	"Version": 1.0,
+	"Version": 1.1,
 	"Desc": "A mod that tweaks the annoying grindy aspects of the game",
 	"IncreasedDesc": "Made by ~ V.H.",
 	"Author": "VH",
 	"Tags": [
-		"Function", "Tweaks"
+		"Function",
+		"Usability"
+	],
+	"ParentModInfo": [
+		"ModLoaderLite,5.1,heihei,ModLoaderLite,1997170546"
 	]
 }
