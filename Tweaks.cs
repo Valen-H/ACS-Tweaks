@@ -522,7 +522,7 @@ namespace Acs_Tweaks {
 						codes[i + 2].LoadsConstant(10) &&
 						codes[i + 3].opcode == OpCodes.Mul) {
 						codes[i + 2].opcode		= OpCodes.Ldc_I4_S;
-						codes[i + 2].operand	= 30;
+						codes[i + 2].operand	= 45;
 						
 						KLog.Dbg("NpcPractice.DaoHangTianJieSuc Patched.");
 						

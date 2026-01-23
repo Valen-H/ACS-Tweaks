@@ -20,7 +20,7 @@ _Requires **ModLoaderLite**._
 - [x] Low % Qi Consumption during Adventures re-entry.
 - [x] Better Disciple Character Generation Stats.
 - [x] Inners can have max 16 Apprentices instead of 8.
-- [x] Attainment Tribulations refund 30 attainment instead of 10.
+- [x] Attainment Tribulations refund 45 attainment instead of 10 and are ~20% easier.
 - [ ] Other Upcoming Easy-Mode tweaks to normalize the game and remove it's exponential boredom (& determinism).
 - [ ] Training Facilities(?)
 - [ ] Better Pet Training.
